@@ -5,15 +5,14 @@ const jwt = require("jsonwebtoken")
 const {JWT_SECRET} = require("../../config/config")
 const { 
     payloadCheck,
-    usernameCheck,
-    emailCheck,
+    usernameAndEmailCheck,
     loginPasswordCheck } = require("./auth-middleware")
 
 function generateToken(payload, expireTime) {
     return jwt.sign(payload, JWT_SECRET, { expiresIn: expireTime });
 }
 
-router.post("/register", payloadCheck, usernameCheck, emailCheck, async (req, res, next) => {
+router.post("/register", payloadCheck, usernameAndEmailCheck, async (req, res, next) => {
     try {
 
         const newUser = {

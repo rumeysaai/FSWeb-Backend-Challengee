@@ -5,7 +5,7 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "resetdb": "knex migrate:rollback && knex migrate:latest && knex seed:run",
-    "test": "cross-env NODE_ENV=testing jest --verbose --runInBand" 
+    "test": "cross-env NODE_ENV=testing jest --verbose --runInBand"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -16,6 +16,9 @@
     "sqlite3": "^5.1.6"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "@types/jest": "^29.5.1",
+    "jest": "^29.5.0",
+    "nodemon": "^2.0.22",
+    "supertest": "^6.3.3"
   }
 }
