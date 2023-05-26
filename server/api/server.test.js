@@ -29,12 +29,12 @@ describe("Auth Tests", () => {
         expect(result.body.UserId).toBeGreaterThan(0);
     });
 
-    it("[2] Register olurken email unique kontrolü yapılıyor mu?", async () => {
+    test("[2] Register olurken email unique kontrolü yapılıyor mu?", async () => {
 
         const sample = { "Username": "Ayşe", "UserEmail": "ali@ali", "Password": "1234" };
         const result = await superTest(server).post("/api/auth/register").send(sample);
         expect(result.status).toBe(400);
-        expect(result.body.message).toBe("Bu email ile kayıtlı bir hesap bulunmaktadır");
+        expect(result.body.message).toBe("Bu e-posta adresi ile kayıtlı bir hesap bulunmaktadır!");
     });
 
     test("[3] Register olurken username kontrolü yapıyor mu?", async () => {
@@ -44,10 +44,10 @@ describe("Auth Tests", () => {
         expect(result.status).toBe(400);
         expect(result.body.message).toBe("Username ve password gereklidir");
 
-        const sampleSecond = { "Username": "Ali", "Password": "1234" };
+        const sampleSecond = { "Username": "Ali", "UserEmail": "ali@ali", "Password": "1234"  };
         const resultSecond = await superTest(server).post("/api/auth/register").send(sampleSecond);
         expect(resultSecond.status).toBe(400);
-        expect(resultSecond.body.message).toEqual("Username alınmış");
+        expect(resultSecond.body.message).toEqual("Kullanıcı adı başka bir kullanıcı tarafından alınmış!");
     });
 
     test("[4] Register olurken password kontrolü yapıyor mu?", async () => {
@@ -61,10 +61,10 @@ describe("Auth Tests", () => {
 
     test("[5] Register olurken password hashleniyor mu?", async () => {
 
-        const sample = { "Username": "Ali", "UserEmail": "ali@ali", "Password": "1234" };
+        const sample = { Username: "Ali", UserEmail: "ali@ali", Password: "1234" };
         await superTest(server).post("/api/auth/register").send(sample);
         const result = await superTest(server).get("/api/user/4");
-        expect(bcryptjs.compareSync(sample.Password, result.body.Password)).toBeTruthy();
+        expect(bcryptjs.compareSync(sample.Password, result.Password)).toBeTruthy();
 
     });
 
@@ -112,7 +112,7 @@ describe("Post Tests", () => {
         expect(postsRes.status).toBe(200);
     });
 
-    it("[11] Id'ye göre post listeleniyor mu?", async () => {
+    test("[11] Id'ye göre post listeleniyor mu?", async () => {
         const sample = { "Username": "Bob", "Password": "1234" }
         const loginRes = await superTest(server).post("/api/auth/login").send(sample);
         const postsRes = await superTest(server).get("/api/post/3").set("authorization", loginRes.body.token)
@@ -194,18 +194,24 @@ describe("Comments Tests", () => {
 describe("Users Tests", () => {
 
     test("[18] Users listeleniyor mu ?", async () => {
-        const userList = await superTest(server).get("/api/user");
+        const sample = { "Username": "Bob", "Password": "1234" }
+        const loginRes = await superTest(server).post("/api/auth/login").send(sample);
+        const userList = await superTest(server).get("/api/user").set("authorization", loginRes.body.token);
         expect(userList.body.length).toBeGreaterThan(0);
     });
 
     test("[19] User Id'ye göre listeleniyor mu ?", async () => {
-        const userList = await superTest(server).get("/api/user/4");
-        expect(userList.body.UserEmail).toEqual("bob@gmail.com")
+        const sample = { "Username": "Bob", "Password": "1234" }
+        const loginRes = await superTest(server).post("/api/auth/login").send(sample);
+        const userList = await superTest(server).get("/api/user/2").set("authorization", loginRes.body.token);
+        expect(userList.body.UserEmail).toEqual("egg@gmail.com")
     });
 
     test("[20] User güncelleniyor mu ?", async () => {
-        const changes = { "Username": "BobBob", "UserEmail": "bob@gmail.com", "Password": "1234" }
-        const updateUser = await superTest(server).put("/api/user/4").send(changes);
-        expect(updateUser.body.Username).toEqual("BobBob");
+        const sample = { "Username": "Bob", "Password": "1234" }
+        const loginRes = await superTest(server).post("/api/auth/login").send(sample);
+        const changes = { "Username": "AliAli", "UserEmail": "bob@gmail.com", "Password": "1234" }
+        const updateUser = await superTest(server).put("/api/user/3").set("authorization", loginRes.body.token).send(changes);
+        expect(updateUser.body.Username).toEqual("AliAli");
     });
 })

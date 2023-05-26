@@ -16,7 +16,7 @@ async function getUserByFilter(filter){
 
 async function createUser(user) {
     const[UserId] = await db("Users").insert(user);
-    return await getUserByfilter({UserId : UserId});
+    return await getUserByFilter({UserId : UserId});
 }
 
 async function updateUser(id, user){

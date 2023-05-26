@@ -55,6 +55,9 @@ const usernameAndEmailCheck = async (req, res, next) => {
         if (userEmail) {
             res.status(400).json({ message: "Bu e-posta adresi ile kayıtlı bir hesap bulunmaktadır!" })
         }
+        else{
+            next()
+        }
 
     } catch (error) {
         next(error)

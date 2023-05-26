@@ -13,7 +13,7 @@ router.get("/", async(req,res,next)=>{
     }
 })
 
-router.get("/:id", async()=>{
+router.get("/:id", async(req,res,next)=>{
     try {
 
         const searchedUser = await Users.getUserById(req.params.id)

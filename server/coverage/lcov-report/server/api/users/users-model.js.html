@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">51.51% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/33</span>
+                <span class='fraction'>33/33</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">51.51% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/33</span>
+                <span class='fraction'>33/33</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -97,29 +97,29 @@
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -129,29 +129,29 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const db = require("../../data/db-config");
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >async function getAllUsers(){</span></span>
-<span class="cstat-no" title="statement not covered" >    const allUsers = await db('Users').select('UserId', "Username", "UserEmail");</span>
-<span class="cstat-no" title="statement not covered" >    return allUsers;</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+async function getAllUsers(){
+    const allUsers = await db('Users').select('UserId', "Username", "UserEmail");
+    return allUsers;
+}
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >async function getUserById(id){</span></span>
-<span class="cstat-no" title="statement not covered" >    const user = await db('Users as u').select("u.UserId", "u.Username", "u.UserEmail", "u.Password").where("userId", id).first();</span>
-<span class="cstat-no" title="statement not covered" >    return user;</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+async function getUserById(id){
+    const user = await db('Users as u').select("u.UserId", "u.Username", "u.UserEmail", "u.Password").where("userId", id).first();
+    return user;
+}
 &nbsp;
 async function getUserByFilter(filter){
     return await db("Users").where(filter).first();
 }
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >async function createUser(user) {</span></span>
-<span class="cstat-no" title="statement not covered" >    const[UserId] = await db("Users").insert(user);</span>
-<span class="cstat-no" title="statement not covered" >    return await getUserByfilter({UserId : UserId});</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+async function createUser(user) {
+    const[UserId] = await db("Users").insert(user);
+    return await getUserByFilter({UserId : UserId});
+}
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >async function updateUser(id, user){</span></span>
-<span class="cstat-no" title="statement not covered" >    const updatedUser = await db("Users").where("UserId", id).update(user);</span>
-<span class="cstat-no" title="statement not covered" >    return await getUserById(id);</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+async function updateUser(id, user){
+    const updatedUser = await db("Users").where("UserId", id).update(user);
+    return await getUserById(id);
+}
 &nbsp;
 module.exports = {
     getAllUsers,
@@ -166,7 +166,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-05-26T10:00:43.502Z
+                at 2023-05-26T13:01:04.803Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
